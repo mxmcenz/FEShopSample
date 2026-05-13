@@ -22,4 +22,9 @@ public class InMemoryProductRepository : IProductRepository
         var product = Products.FirstOrDefault(p => p.Id == id);
         return await Task.FromResult(product);
     }
+
+    public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken ct)
+    {
+        return await Task.FromResult(Products);
+    }
 }
