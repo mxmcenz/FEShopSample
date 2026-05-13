@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: feshop_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+  api:
+    image: feshop_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: feshop_api
+    depends_on:
+      - db
+    ports:
+      - "5555:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection}
+      - ASPNETCORE_ENVIRONMENT=Development
+
+volumes:
+  postgres_data:    
