@@ -14,8 +14,14 @@ public class ProductRepository(FEShopDbContext context) : IProductRepository
     }
 
     public async Task<Product?> GetByIdAsync(int id, CancellationToken ct) =>
-        await context.Products.FirstOrDefaultAsync(p => p.Id == id, ct);
+        await context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id, ct);
 
     public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken ct) =>
         await context.Products.AsNoTracking().ToListAsync(ct);
+
+    public async Task<bool> DeleteAsync(int id, CancellationToken ct)
+    {
+        var affectedRows = await context.Products.Where(p => p.Id == id).ExecuteDeleteAsync(ct);
+        return affectedRows > 0;
+    }
 }

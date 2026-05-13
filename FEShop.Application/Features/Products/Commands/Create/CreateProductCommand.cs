@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace FEShop.Application.Features.Products.Commands.CreateProduct;
+namespace FEShop.Application.Features.Products.Commands.Create;
 
 public class CreateProductCommand : ICommand<int>
 {

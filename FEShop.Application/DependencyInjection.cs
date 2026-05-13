@@ -1,7 +1,8 @@
 using FastEndpoints;
-using FEShop.Application.Features.Products.Commands.CreateProduct;
-using FEShop.Application.Features.Products.Commands.GetAllProducts;
-using FEShop.Application.Features.Products.Commands.GetProduct;
+using FEShop.Application.Features.Products.Commands.Create;
+using FEShop.Application.Features.Products.Commands.Delete;
+using FEShop.Application.Features.Products.Commands.Get;
+using FEShop.Application.Features.Products.Commands.GetAll;
 using FEShop.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,7 @@ public static class DependencyInjection
         services.AddScoped<ICommandHandler<CreateProductCommand, int>, CreateProductHandler>();
         services.AddScoped<ICommandHandler<GetProductByIdCommand, Product?>, GetProductByIdHandler>();
         services.AddScoped<ICommandHandler<GetAllProductsCommand, IEnumerable<Product>>, GetAllProductsHandler>();
+        services.AddScoped<ICommandHandler<DeleteProductCommand, bool>, DeleteProductHandler>();
         
         return services;
     }

@@ -1,5 +1,5 @@
 using FastEndpoints;
-using FEShop.Application.Features.Products.Commands.CreateProduct;
+using FEShop.Application.Features.Products.Commands.Create;
 
 namespace FEShop.WebApi.Features.Products.Create;
 
@@ -20,7 +20,7 @@ public class Endpoint : Endpoint<Request, Response>
             Price = req.Price
         };
 
-        int productId = await command.ExecuteAsync(ct);
+        var productId = await command.ExecuteAsync(ct);
 
         var response = new Response
         {

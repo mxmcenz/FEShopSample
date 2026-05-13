@@ -1,5 +1,5 @@
 using FastEndpoints;
-using FEShop.Application.Features.Products.Commands.GetProduct;
+using FEShop.Application.Features.Products.Commands.Get;
 
 namespace FEShop.WebApi.Features.Products.GetById;
 
