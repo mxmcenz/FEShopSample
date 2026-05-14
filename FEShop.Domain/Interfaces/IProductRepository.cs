@@ -8,4 +8,5 @@ public interface IProductRepository
     Task<Product?> GetByIdAsync(int id, CancellationToken ct);
     Task<IEnumerable<Product>> GetAllAsync(CancellationToken ct);
     Task<bool> DeleteAsync(int id, CancellationToken ct);
+    Task<bool> UpdateAsync(int id, string? name, string? description, decimal? price, CancellationToken ct);
 }

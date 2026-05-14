@@ -24,4 +24,16 @@ public class ProductRepository(FEShopDbContext context) : IProductRepository
         var affectedRows = await context.Products.Where(p => p.Id == id).ExecuteDeleteAsync(ct);
         return affectedRows > 0;
     }
+
+    public async Task<bool> UpdateAsync(int id, string? name, string? description, decimal? price, CancellationToken ct)
+    {
+        var affectedRows = await context.Products
+            .Where(p => p.Id == id)
+            .ExecuteUpdateAsync(setter => setter
+                    .SetProperty(p => p.Name, old => name ?? old.Name)
+                    .SetProperty(p => p.Description, old => description ?? old.Description)
+                    .SetProperty(p => p.Price, old => price ?? old.Price),
+                ct);
+        return affectedRows > 0;
+    }
 }
